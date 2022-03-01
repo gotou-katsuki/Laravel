@@ -14,5 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('hello/{id?}/{pass?}','HelloController@index');
 
+Route::get('hello', 'HelloController@index');
+
+
+
+// 問題
+Route::get('jissyu', 'jissyuController@index');
