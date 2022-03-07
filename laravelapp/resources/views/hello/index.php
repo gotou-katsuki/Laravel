@@ -15,5 +15,5 @@
 <body>
    <h1></h1>
    <p><?php echo $msg; ?></p>
-   <p><?php echo date("Y年n月j日"); ?></p>
-</body>
+   <p>ID=<?php echo $id; ?></p>
+   </body>
