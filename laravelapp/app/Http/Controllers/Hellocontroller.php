@@ -1,20 +1,21 @@
 <?php
+namespace App\Providers;
 
-namespace App\Http\Controllers;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
-class HelloController extends Controller
+class HelloServiceProvider extends ServiceProvider
 {
-   public function index(){
-
-   $data = ['one', 'two', 'three', 'four', 'five'];
-   return view('hello.index', ['data'=>$data]);
-}
-
-public function post(Request $request)
-{
-    return view('hello.index', ['msg'=>$request->msg]);
-}
+   public function register()
+   {
+       //
+   }
+   public function boot()
+   {
+       View::composer(
+           'hello.index', function($view){
+               $view->with('view_message', 'composer message!');
+           }
+       );
+   }
 }
