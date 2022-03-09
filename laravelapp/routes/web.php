@@ -16,10 +16,19 @@ Route::get('/', function () {
 });
 
 Route::get('hello', 'HelloController@index');
-Route::get('hello', 'HelloController@post');
+Route::post('hello', 'HelloController@post');
 
 
 
 
 // 問題
 Route::get('jissyu', 'jissyuController@index');
+
+// 2-1
+Route::get('jissyu2', 'jissyu2Controller@index');
+Route::post('jissyu2', 'jissyu2Controller@post');
+
+// 3-1
+Route::get('jissyu3', 'jissyu3Controller@index');
+
+
