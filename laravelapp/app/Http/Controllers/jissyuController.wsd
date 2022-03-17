@@ -1,0 +1,11 @@
+@startuml jissyuController
+actor ユーザ
+boundary web.php
+control kemel.php
+
+ユーザ　-> ブラウザ:該当ページをリクエスト
+
+alt 成功
+else エラー表示
+end
+@enduml

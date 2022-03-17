@@ -5,33 +5,32 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Requests\HelloRequest;
 use Validator; 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+
 
 class HelloController extends Controller
 {
   
-   public function index(Request $request)
-   {
-       if ($request->hasCookie('msg'))
-       {
-           $msg = 'Cookie: ' . $request->cookie('msg');
-       } else {
-           $msg = '※クッキーはありません。';
-       }
-       return view('hello.index', ['msg'=> $msg]);
-   }
-
-    public function post(Request $request)
+    public function edit(Request $request)
     {
-        $validate_rule = [
-            'msg' => 'required',
-        ];
-        $this->validate($request, $validate_rule);
-        $msg = $request->msg;
-        $response = response()->view('hello.index', 
-            ['msg'=>'「' . $msg . 
-            '」をクッキーに保存しました。']);
-        $response->cookie('msg', $msg, 100);
-        return $response;
+       $item = DB::table('people')
+           ->where('id', $request->id)->first();
+       return view('hello.edit', ['form' => $item]);
     }
-
+    
+    public function update(Request $request)
+    {
+       $param = [
+           'name' => $request->name,
+           'mail' => $request->mail,
+           'age' => $request->age,
+       ];
+       DB::table('people')
+           ->where('id', $request->id)
+           ->update($param);
+       return redirect('/hello');
+    }
 }
